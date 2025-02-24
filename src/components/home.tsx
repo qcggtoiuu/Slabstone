@@ -1,16 +1,18 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
-import ProductGrid from "./ProductGrid";
-import ProductDetail from "./ProductDetail";
-import ProductionLine from "./ProductionLine";
-import TechnologyShowcase from "./TechnologyShowcase";
-import FactoryVideo from "./FactoryVideo";
-import NewsSection from "./NewsSection";
-import BeautifulHomes from "./BeautifulHomes";
 import Footer from "./Footer";
 import SEO from "./SEO";
 import { pageSEO } from "@/lib/seo";
+import { Skeleton } from "./ui/skeleton";
+
+const ProductGrid = lazy(() => import("./ProductGrid"));
+const ProductDetail = lazy(() => import("./ProductDetail"));
+const ProductionLine = lazy(() => import("./ProductionLine"));
+const TechnologyShowcase = lazy(() => import("./TechnologyShowcase"));
+const FactoryVideo = lazy(() => import("./FactoryVideo"));
+const NewsSection = lazy(() => import("./NewsSection"));
+const BeautifulHomes = lazy(() => import("./BeautifulHomes"));
 
 interface HomeProps {
   initialSelectedProductId?: string;
@@ -50,35 +52,49 @@ const Home = ({ initialSelectedProductId = "" }: HomeProps) => {
             <HeroSection onExploreClick={handleExploreClick} />
           </section>
 
-          <section aria-label="Quy trình sản xuất">
-            <ProductionLine />
-          </section>
+          <Suspense fallback={<Skeleton className="h-[600px] w-full" />}>
+            <section aria-label="Quy trình sản xuất">
+              <ProductionLine />
+            </section>
+          </Suspense>
 
-          <section aria-label="Nhà máy">
-            <FactoryVideo />
-          </section>
+          <Suspense fallback={<Skeleton className="h-[600px] w-full" />}>
+            <section aria-label="Nhà máy">
+              <FactoryVideo />
+            </section>
+          </Suspense>
 
-          <section aria-label="Công nghệ">
-            <TechnologyShowcase />
-          </section>
+          <Suspense fallback={<Skeleton className="h-[600px] w-full" />}>
+            <section aria-label="Công nghệ">
+              <TechnologyShowcase />
+            </section>
+          </Suspense>
 
-          <section id="product-grid" aria-label="Sản phẩm nổi bật">
-            <ProductGrid onProductClick={handleProductClick} />
-          </section>
+          <Suspense fallback={<Skeleton className="h-[800px] w-full" />}>
+            <section id="product-grid" aria-label="Sản phẩm nổi bật">
+              <ProductGrid onProductClick={handleProductClick} />
+            </section>
+          </Suspense>
 
-          <ProductDetail
-            isOpen={!!selectedProductId}
-            onClose={handleCloseProductDetail}
-            product={selectedProductId ? undefined : undefined}
-          />
+          <Suspense fallback={null}>
+            <ProductDetail
+              isOpen={!!selectedProductId}
+              onClose={handleCloseProductDetail}
+              product={selectedProductId ? undefined : undefined}
+            />
+          </Suspense>
 
-          <section aria-label="Dự án tiêu biểu">
-            <BeautifulHomes />
-          </section>
+          <Suspense fallback={<Skeleton className="h-[600px] w-full" />}>
+            <section aria-label="Dự án tiêu biểu">
+              <BeautifulHomes />
+            </section>
+          </Suspense>
 
-          <section aria-label="Tin tức và sự kiện">
-            <NewsSection />
-          </section>
+          <Suspense fallback={<Skeleton className="h-[600px] w-full" />}>
+            <section aria-label="Tin tức và sự kiện">
+              <NewsSection />
+            </section>
+          </Suspense>
         </article>
       </main>
       <Footer />

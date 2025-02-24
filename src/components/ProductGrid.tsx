@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import FilterBar from "./FilterBar";
 import ProductCard from "./ProductCard";
 import ProductDetail from "./ProductDetail";
+import ProductCardSkeleton from "./ProductCardSkeleton";
 import { fetchProducts } from "@/lib/sheets";
 import { Product, FilterOption } from "@/types/product";
 
@@ -29,39 +30,46 @@ const ProductGrid = ({ onProductClick = () => {} }: ProductGridProps) => {
     applications: [],
   });
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const loadProducts = async () => {
-      const data = await fetchProducts();
-      setProducts(data);
+      setIsLoading(true);
+      try {
+        const data = await fetchProducts();
+        setProducts(data);
 
-      // Extract unique filter options from products
-      const colors = new Set<string>();
-      const patterns = new Set<string>();
-      const applications = new Set<string>();
+        // Extract unique filter options from products
+        const colors = new Set<string>();
+        const patterns = new Set<string>();
+        const applications = new Set<string>();
 
-      data.forEach((product) => {
-        if (product.color) colors.add(product.color);
-        if (product.surface) patterns.add(product.surface);
-        if (product.application) applications.add(product.application);
-      });
+        data.forEach((product) => {
+          if (product.color) colors.add(product.color);
+          if (product.surface) patterns.add(product.surface);
+          if (product.application) applications.add(product.application);
+        });
 
-      setFilterOptions({
-        colors: Array.from(colors).map((value, id) => ({
-          id: String(id + 1),
-          label: value,
-          value: value,
-        })),
-        patterns: Array.from(patterns).map((value, id) => ({
-          id: String(id + 1),
-          label: value,
-          value: value,
-        })),
-        applications: Array.from(applications).map((value, id) => ({
-          id: String(id + 1),
-          label: value,
-          value: value,
-        })),
-      });
+        setFilterOptions({
+          colors: Array.from(colors).map((value, id) => ({
+            id: String(id + 1),
+            label: value,
+            value: value,
+          })),
+          patterns: Array.from(patterns).map((value, id) => ({
+            id: String(id + 1),
+            label: value,
+            value: value,
+          })),
+          applications: Array.from(applications).map((value, id) => ({
+            id: String(id + 1),
+            label: value,
+            value: value,
+          })),
+        });
+      } finally {
+        setIsLoading(false);
+      }
     };
     loadProducts();
   }, []);
@@ -102,7 +110,15 @@ const ProductGrid = ({ onProductClick = () => {} }: ProductGridProps) => {
       />
 
       <div className="max-w-7xl mx-auto py-8 px-4">
-        {filteredProducts.length === 0 ? (
+        {isLoading ? (
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6 [&>*]:w-full">
+            {Array(visibleProducts)
+              .fill(0)
+              .map((_, index) => (
+                <ProductCardSkeleton key={index} />
+              ))}
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-lg text-gray-600">
               Không tìm thấy sản phẩm phù hợp với bộ lọc.
@@ -111,23 +127,35 @@ const ProductGrid = ({ onProductClick = () => {} }: ProductGridProps) => {
         ) : (
           <div className="space-y-8">
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-6 [&>*]:w-full">
-              {filteredProducts
-                .slice(0, visibleProducts)
-                .map((product, index) => (
-                  <ProductCard
-                    key={`${product.code || index}`}
-                    id={product.code}
-                    name={product.name}
-                    image={product.images.image1}
-                    price={product.price}
-                    category={product.collection}
-                    description={product.description}
-                    surface={product.surface}
-                    thickness={product.thickness}
-                    dimensions={product.dimensions}
-                    onClick={() => handleProductClick(product)}
-                  />
-                ))}
+              <Suspense
+                fallback={
+                  <>
+                    {Array(visibleProducts)
+                      .fill(0)
+                      .map((_, index) => (
+                        <ProductCardSkeleton key={index} />
+                      ))}
+                  </>
+                }
+              >
+                {filteredProducts
+                  .slice(0, visibleProducts)
+                  .map((product, index) => (
+                    <ProductCard
+                      key={`${product.code || index}`}
+                      id={product.code}
+                      name={product.name}
+                      image={product.images.image1}
+                      price={product.price}
+                      category={product.collection}
+                      description={product.description}
+                      surface={product.surface}
+                      thickness={product.thickness}
+                      dimensions={product.dimensions}
+                      onClick={() => handleProductClick(product)}
+                    />
+                  ))}
+              </Suspense>
             </div>
 
             {filteredProducts.length > visibleProducts && (

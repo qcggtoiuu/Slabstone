@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { preloadImages } from "@/lib/preload";
 import { Button } from "./ui/button";
 import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
@@ -9,11 +10,21 @@ interface HeroSectionProps {
   onExploreClick?: () => void;
 }
 
+const CRITICAL_IMAGES = [
+  "https://slabstone.vn/wp-content/uploads/2023/02/cropped-soc-do.png",
+  "https://noithatgiakhanh.com/wp-content/uploads/2025/02/3306588-scaled.jpg",
+  "https://noithatgiakhanh.com/wp-content/uploads/2025/02/bodytechnen.jpg",
+  "https://noithatgiakhanh.com/wp-content/uploads/2025/02/veintechnen.jpg",
+];
+
 const HeroSection = ({
   title = "Nhà máy Đá Nung Kết đầu tiên tại Việt Nam",
   subtitle = "Khám phá bộ sưu tập mẫu đá nung kết cao cấp của chúng tôi, được chế tác để tạo nên vẻ đẹp vĩnh cửu và vượt mọi giới hạn",
   onExploreClick = () => {},
 }: HeroSectionProps) => {
+  useEffect(() => {
+    preloadImages(CRITICAL_IMAGES);
+  }, []);
   return (
     <div className="relative w-full h-[600px] bg-black overflow-hidden">
       {/* Video Background */}

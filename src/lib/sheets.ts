@@ -4,9 +4,20 @@ import { Product } from "@/types/product";
 // Your published Google Sheet CSV URL
 const SHEET_URL = import.meta.env.VITE_GOOGLE_SHEET_URL;
 
+import { cacheGet, cacheSet } from "./cache";
+
 export async function fetchProducts(): Promise<Product[]> {
+  const cached = cacheGet("products");
+  if (cached) return cached;
   try {
-    const response = await fetch(SHEET_URL);
+    const response = await fetch(SHEET_URL, {
+      signal: AbortSignal.timeout(5000), // 5 second timeout
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const csvData = await response.text();
 
     return new Promise((resolve, reject) => {
@@ -38,6 +49,7 @@ export async function fetchProducts(): Promise<Product[]> {
               image7: row["Ảnh 7"] || "",
             },
           }));
+          cacheSet("products", products);
           resolve(products);
         },
         error: (error) => {
@@ -48,6 +60,11 @@ export async function fetchProducts(): Promise<Product[]> {
     });
   } catch (error) {
     console.error("Error fetching products:", error);
+    const cached = cacheGet("products");
+    if (cached) {
+      console.log("Using cached data due to fetch error");
+      return cached;
+    }
     return [];
   }
 }
