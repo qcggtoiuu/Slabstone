@@ -30,7 +30,7 @@ const ProductCard = ({
   onClick = () => {},
 }: ProductCardProps) => {
   return (
-    <Card className="w-full max-w-[280px] bg-white hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
+    <Card className="w-full max-w-[280px] bg-white hover:shadow-lg transition-shadow duration-300 overflow-hidden group flex flex-col">
       <CardHeader className="p-0">
         <div className="relative aspect-[1/2] overflow-hidden">
           <img
@@ -43,22 +43,30 @@ const ProductCard = ({
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="p-4">
-        <h3 className="font-semibold text-lg mb-2 text-gray-900 line-clamp-1">
-          {name}
-        </h3>
-        {surface && (
-          <p className="text-sm text-gray-600 mb-1">Bề mặt: {surface}</p>
-        )}
-        {thickness && (
-          <p className="text-sm text-gray-600 mb-1">Độ dày: {thickness}</p>
-        )}
-        {dimensions && (
-          <p className="text-sm text-gray-600 mb-2">Kích thước: {dimensions}</p>
-        )}
-        {price && <p className="text-lg font-bold text-gray-900">{price}</p>}
+      <CardContent className="p-4 flex-1">
+        <div className="h-full flex flex-col">
+          <h3 className="font-semibold text-lg mb-2 text-gray-900 line-clamp-1">
+            {name}
+          </h3>
+          <div className="flex-1">
+            {surface && (
+              <p className="text-sm text-gray-600 mb-1">Bề mặt: {surface}</p>
+            )}
+            {thickness && (
+              <p className="text-sm text-gray-600 mb-1">Độ dày: {thickness}</p>
+            )}
+            {dimensions && (
+              <p className="text-sm text-gray-600 mb-2">
+                Kích thước: {dimensions}
+              </p>
+            )}
+          </div>
+          {price && (
+            <p className="text-lg font-bold text-gray-900 mt-auto">{price}</p>
+          )}
+        </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-4 pt-0 mt-auto">
         <Button
           variant="default"
           size="lg"
