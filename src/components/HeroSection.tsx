@@ -10,8 +10,8 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({
-  title = "Premium Stone Collection",
-  subtitle = "Discover our exquisite range of luxury stones, crafted for timeless elegance",
+  title = "Nhà máy Đá Nung Kết đầu tiên tại Việt Nam",
+  subtitle = "Khám phá bộ sưu tập mẫu đá nung kết cao cấp của chúng tôi, được chế tác để tạo nên vẻ đẹp vĩnh cửu và vượt mọi giới hạn",
   onExploreClick = () => {},
 }: HeroSectionProps) => {
   return (
@@ -60,7 +60,7 @@ const HeroSection = ({
             onClick={onExploreClick}
             className="bg-white text-black hover:bg-white/90"
           >
-            Explore Collection
+            Khám phá ngay
           </Button>
         </motion.div>
 
@@ -76,7 +76,7 @@ const HeroSection = ({
             transition={{ duration: 1.5, repeat: Infinity }}
             className="flex flex-col items-center"
           >
-            <span className="text-sm mb-2">Scroll to explore</span>
+            <span className="text-sm mb-2">Cuộn xuống để xem thêm</span>
             <ChevronDown className="w-6 h-6" />
           </motion.div>
         </motion.div>

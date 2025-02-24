@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 
 const Header = () => {
@@ -8,10 +8,29 @@ const Header = () => {
       {/* Top bar */}
       <div className="bg-[#333333] text-white px-4 py-2">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div>SHOWROOM</div>
+          <div className="flex items-center space-x-6">
+            <a
+              href="/factory"
+              className="hover:text-gray-300 transition-colors"
+            >
+              Nhà máy
+            </a>
+            <a
+              href="/distributor"
+              className="hover:text-gray-300 transition-colors"
+            >
+              Chính sách nhà phân phối
+            </a>
+          </div>
           <div className="flex items-center gap-2">
             <Phone className="w-4 h-4" />
-            <span>Hotline: 0999999999</span>
+            <Button
+              variant="link"
+              className="text-white p-0 h-auto font-normal hover:text-gray-300"
+              onClick={() => (window.location.href = "tel:0978649797")}
+            >
+              Hotline: 0978649797
+            </Button>
           </div>
         </div>
       </div>
@@ -28,8 +47,8 @@ const Header = () => {
             />
           </div>
 
-          {/* Navigation links */}
-          <div className="flex items-center space-x-8">
+          {/* Navigation links - Desktop */}
+          <div className="hidden md:flex items-center space-x-8">
             <Button
               variant="ghost"
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
@@ -46,7 +65,7 @@ const Header = () => {
               variant="ghost"
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
             >
-              Showroom
+              Bảng giá
             </Button>
             <Button
               variant="ghost"
@@ -59,6 +78,27 @@ const Header = () => {
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
             >
               Liên hệ
+            </Button>
+          </div>
+
+          {/* Navigation links - Mobile */}
+          <div className="md:hidden">
+            <Button variant="ghost" size="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
             </Button>
           </div>
         </div>

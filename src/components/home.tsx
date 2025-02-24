@@ -6,6 +6,9 @@ import ProductDetail from "./ProductDetail";
 import ProductionLine from "./ProductionLine";
 import TechnologyShowcase from "./TechnologyShowcase";
 import FactoryVideo from "./FactoryVideo";
+import NewsSection from "./NewsSection";
+import BeautifulHomes from "./BeautifulHomes";
+import Footer from "./Footer";
 
 interface HomeProps {
   initialSelectedProductId?: string;
@@ -47,8 +50,12 @@ const Home = ({ initialSelectedProductId = "" }: HomeProps) => {
       <ProductDetail
         isOpen={!!selectedProductId}
         onClose={handleCloseProductDetail}
-        product={selectedProductId ? undefined : undefined} // In a real app, you would fetch product details based on selectedProductId
+        product={selectedProductId ? undefined : undefined}
       />
+
+      <BeautifulHomes />
+      <NewsSection />
+      <Footer />
     </div>
   );
 };

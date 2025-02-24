@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { Eye, ShoppingBag } from "lucide-react";
+import { Eye } from "lucide-react";
 
 interface ProductCardProps {
   id?: string;
@@ -11,6 +11,9 @@ interface ProductCardProps {
   price?: string;
   category?: string;
   description?: string;
+  surface?: string;
+  thickness?: string;
+  dimensions?: string;
   onClick?: () => void;
 }
 
@@ -21,12 +24,15 @@ const ProductCard = ({
   price = "2.990.000đ/m²",
   category = "Đá marble",
   description = "Đá marble trắng với vân xám tinh tế, hoàn hảo cho nội thất cao cấp.",
+  surface = "",
+  thickness = "",
+  dimensions = "",
   onClick = () => {},
 }: ProductCardProps) => {
   return (
-    <Card className="w-[280px] h-[560px] bg-white hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
+    <Card className="w-full max-w-[280px] bg-white hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
       <CardHeader className="p-0">
-        <div className="relative h-[400px] overflow-hidden">
+        <div className="relative aspect-[1/2] overflow-hidden">
           <img
             src={image}
             alt={name}
@@ -38,23 +44,29 @@ const ProductCard = ({
         </div>
       </CardHeader>
       <CardContent className="p-4">
-        <h3 className="font-semibold text-lg mb-2 text-gray-900">{name}</h3>
-        <p className="text-sm text-gray-600 line-clamp-2 mb-2">{description}</p>
-        <p className="text-lg font-bold text-gray-900">{price}</p>
+        <h3 className="font-semibold text-lg mb-2 text-gray-900 line-clamp-1">
+          {name}
+        </h3>
+        {surface && (
+          <p className="text-sm text-gray-600 mb-1">Bề mặt: {surface}</p>
+        )}
+        {thickness && (
+          <p className="text-sm text-gray-600 mb-1">Độ dày: {thickness}</p>
+        )}
+        {dimensions && (
+          <p className="text-sm text-gray-600 mb-2">Kích thước: {dimensions}</p>
+        )}
+        {price && <p className="text-lg font-bold text-gray-900">{price}</p>}
       </CardContent>
-      <CardFooter className="p-4 pt-0 flex gap-2">
+      <CardFooter className="p-4 pt-0">
         <Button
-          variant="outline"
-          size="sm"
-          className="flex-1"
+          variant="default"
+          size="lg"
+          className="w-full bg-[#0f172a] hover:bg-[#0f172a]/90"
           onClick={onClick}
         >
           <Eye className="w-4 h-4 mr-2" />
           Xem chi tiết
-        </Button>
-        <Button size="sm" className="flex-1">
-          <ShoppingBag className="w-4 h-4 mr-2" />
-          Đặt mẫu
         </Button>
       </CardFooter>
     </Card>

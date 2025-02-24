@@ -1,18 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Calendar } from "@/components/ui/calendar";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
+import * as z from "zod";
 
 interface SampleRequestFormProps {
   productName?: string;
@@ -20,24 +14,34 @@ interface SampleRequestFormProps {
   isOpen?: boolean;
 }
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  appointmentDate: Date;
-  message: string;
-}
+const formSchema = z.object({
+  name: z.string().min(1, "Vui lòng nhập họ tên"),
+  company: z.string().min(1, "Vui lòng nhập tên công ty"),
+  phone: z.string().min(10, "Số điện thoại không hợp lệ"),
+  message: z.string().optional(),
+});
+
+type FormData = z.infer<typeof formSchema>;
 
 const SampleRequestForm = ({
   productName = "Premium Stone Sample",
   onSubmit = () => {},
   isOpen = true,
 }: SampleRequestFormProps) => {
-  const { register, handleSubmit, setValue, watch } = useForm<FormData>();
-  const appointmentDate = watch("appointmentDate");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  });
 
-  const onFormSubmit = (data: FormData) => {
-    onSubmit(data);
+  const onFormSubmit = async (data: FormData) => {
+    try {
+      await onSubmit(data);
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   };
 
   if (!isOpen) return null;
@@ -45,80 +49,67 @@ const SampleRequestForm = ({
   return (
     <Card className="w-[400px] bg-white">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">
-          Request Sample: {productName}
+        <CardTitle className="text-xl font-bold text-center">
+          Đặt mẫu sản phẩm: {productName}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
+            <Label htmlFor="name">
+              Họ và tên <span className="text-red-500">*</span>
+            </Label>
             <Input
               id="name"
-              placeholder="Enter your full name"
+              placeholder="Nhập họ và tên của bạn"
               {...register("name")}
             />
+            {errors.name && (
+              <p className="text-sm text-red-500">{errors.name.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="company">
+              Tên công ty <span className="text-red-500">*</span>
+            </Label>
             <Input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              {...register("email")}
+              id="company"
+              placeholder="Nhập tên công ty của bạn"
+              {...register("company")}
             />
+            {errors.company && (
+              <p className="text-sm text-red-500">{errors.company.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
+            <Label htmlFor="phone">
+              Số điện thoại <span className="text-red-500">*</span>
+            </Label>
             <Input
               id="phone"
               type="tel"
-              placeholder="Enter your phone number"
+              placeholder="Nhập số điện thoại của bạn"
               {...register("phone")}
             />
+            {errors.phone && (
+              <p className="text-sm text-red-500">{errors.phone.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
-            <Label>Preferred Appointment Date</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start text-left font-normal"
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {appointmentDate ? (
-                    format(appointmentDate, "PPP")
-                  ) : (
-                    <span>Pick a date</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={appointmentDate}
-                  onSelect={(date) => setValue("appointmentDate", date)}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="message">Additional Notes</Label>
+            <Label htmlFor="message">Ghi chú thêm</Label>
             <Textarea
               id="message"
-              placeholder="Any specific requirements or questions?"
+              placeholder="Nhập yêu cầu cụ thể hoặc câu hỏi của bạn"
               className="min-h-[100px]"
               {...register("message")}
             />
           </div>
 
-          <Button type="submit" className="w-full">
-            Submit Request
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? "Đang gửi..." : "Gửi yêu cầu"}
           </Button>
         </form>
       </CardContent>
