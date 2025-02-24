@@ -17,7 +17,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <img
-              src="/slabstone-logo.png"
+              src="https://noithatgiakhanh.com/wp-content/uploads/2025/02/230207_SLABSTONE_LOGO_WhiteRed-1.png"
               alt="SLABSTONE"
               className="h-8 mb-6"
             />

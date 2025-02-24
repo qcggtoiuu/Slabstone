@@ -10,13 +10,13 @@ const Header = () => {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <a
-              href="/factory"
+              href="/nha-may"
               className="hover:text-gray-300 transition-colors"
             >
               Nhà máy
             </a>
             <a
-              href="/distributor"
+              href="/nha-phan-phoi"
               className="hover:text-gray-300 transition-colors"
             >
               Chính sách nhà phân phối
@@ -39,7 +39,10 @@ const Header = () => {
       <nav className="bg-white border-b px-4 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
-          <div className="h-8">
+          <div
+            className="h-8 cursor-pointer"
+            onClick={() => (window.location.href = "/")}
+          >
             <img
               src="https://noithatgiakhanh.com/wp-content/uploads/2025/02/slabstone-logo.png"
               alt="Slabstone"
@@ -52,32 +55,44 @@ const Header = () => {
             <Button
               variant="ghost"
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
+              onClick={() => (window.location.href = "/san-pham")}
             >
               Sản phẩm
             </Button>
             <Button
               variant="ghost"
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
+              onClick={() => (window.location.href = "/du-an")}
             >
               Dự án
             </Button>
             <Button
               variant="ghost"
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
+              onClick={() => (window.location.href = "/bang-gia")}
             >
               Bảng giá
             </Button>
             <Button
               variant="ghost"
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
+              onClick={() => (window.location.href = "/tin-tuc")}
             >
               Tin tức
             </Button>
             <Button
               variant="ghost"
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
+              onClick={() => (window.location.href = "/lien-he")}
             >
               Liên hệ
+            </Button>
+            <Button
+              variant="ghost"
+              className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
+              onClick={() => (window.location.href = "/gioi-thieu")}
+            >
+              Về chúng tôi
             </Button>
           </div>
 

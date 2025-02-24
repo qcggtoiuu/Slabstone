@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -35,6 +35,20 @@ const ProductDetail = ({
   const [activeTab, setActiveTab] = useState("overview");
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [showZoom, setShowZoom] = useState(false);
+
+  useEffect(() => {
+    if (!product && isOpen) {
+      // Add noindex meta tag for non-existent products
+      const meta = document.createElement("meta");
+      meta.name = "robots";
+      meta.content = "noindex";
+      document.head.appendChild(meta);
+
+      return () => {
+        document.head.removeChild(meta);
+      };
+    }
+  }, [product, isOpen]);
 
   if (!product) return null;
 

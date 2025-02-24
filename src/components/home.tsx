@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
 import ProductGrid from "./ProductGrid";
@@ -9,13 +9,15 @@ import FactoryVideo from "./FactoryVideo";
 import NewsSection from "./NewsSection";
 import BeautifulHomes from "./BeautifulHomes";
 import Footer from "./Footer";
+import SEO from "./SEO";
+import { pageSEO } from "@/lib/seo";
 
 interface HomeProps {
   initialSelectedProductId?: string;
 }
 
 const Home = ({ initialSelectedProductId = "" }: HomeProps) => {
-  const [selectedProductId, setSelectedProductId] = useState(
+  const [selectedProductId, setSelectedProductId] = React.useState(
     initialSelectedProductId,
   );
 
@@ -28,7 +30,6 @@ const Home = ({ initialSelectedProductId = "" }: HomeProps) => {
   };
 
   const handleExploreClick = () => {
-    // Smooth scroll to product grid
     const productGrid = document.querySelector("#product-grid");
     if (productGrid) {
       productGrid.scrollIntoView({ behavior: "smooth" });
@@ -37,24 +38,49 @@ const Home = ({ initialSelectedProductId = "" }: HomeProps) => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO {...pageSEO.home} />
       <Header />
-      <HeroSection onExploreClick={handleExploreClick} />
-      <ProductionLine />
-      <FactoryVideo />
-      <TechnologyShowcase />
+      <main>
+        <article>
+          <h1 className="sr-only">
+            SLABSTONE - Nhà máy đá nung kết đầu tiên tại Việt Nam
+          </h1>
 
-      <div id="product-grid">
-        <ProductGrid onProductClick={handleProductClick} />
-      </div>
+          <section aria-label="Giới thiệu">
+            <HeroSection onExploreClick={handleExploreClick} />
+          </section>
 
-      <ProductDetail
-        isOpen={!!selectedProductId}
-        onClose={handleCloseProductDetail}
-        product={selectedProductId ? undefined : undefined}
-      />
+          <section aria-label="Quy trình sản xuất">
+            <ProductionLine />
+          </section>
 
-      <BeautifulHomes />
-      <NewsSection />
+          <section aria-label="Nhà máy">
+            <FactoryVideo />
+          </section>
+
+          <section aria-label="Công nghệ">
+            <TechnologyShowcase />
+          </section>
+
+          <section id="product-grid" aria-label="Sản phẩm nổi bật">
+            <ProductGrid onProductClick={handleProductClick} />
+          </section>
+
+          <ProductDetail
+            isOpen={!!selectedProductId}
+            onClose={handleCloseProductDetail}
+            product={selectedProductId ? undefined : undefined}
+          />
+
+          <section aria-label="Dự án tiêu biểu">
+            <BeautifulHomes />
+          </section>
+
+          <section aria-label="Tin tức và sự kiện">
+            <NewsSection />
+          </section>
+        </article>
+      </main>
       <Footer />
     </div>
   );

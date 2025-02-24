@@ -17,7 +17,7 @@ const ProductGrid = ({ onProductClick = () => {} }: ProductGridProps) => {
     Record<string, string>
   >({});
   const [visibleProducts, setVisibleProducts] = useState<number>(
-    window.innerWidth >= 1024 ? 18 : 12,
+    window.innerWidth >= 1024 ? 12 : 8,
   );
   const [filterOptions, setFilterOptions] = useState<{
     colors: FilterOption[];
@@ -138,7 +138,7 @@ const ProductGrid = ({ onProductClick = () => {} }: ProductGridProps) => {
                   className="bg-[#0f172a] hover:bg-[#0f172a]/90 text-white px-8"
                   onClick={() =>
                     setVisibleProducts(
-                      (prev) => prev + (window.innerWidth >= 1024 ? 18 : 12),
+                      (prev) => prev + (window.innerWidth >= 1024 ? 12 : 8),
                     )
                   }
                 >
