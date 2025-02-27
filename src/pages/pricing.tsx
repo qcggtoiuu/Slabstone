@@ -3,10 +3,51 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+import SEO from "@/components/SEO";
+import { generateSEO } from "@/lib/seo";
 
 const PricingPage = () => {
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        {...generateSEO({
+          title: "Bảng giá sản phẩm",
+          description:
+            "Bảng giá chi tiết các sản phẩm đá cao cấp SLABSTONE. Liên hệ ngay để nhận báo giá tốt nhất và tư vấn miễn phí về sản phẩm.",
+          sections: [
+            {
+              title: "Danh mục sản phẩm",
+              content: [
+                "Đá cao cấp",
+                "Đá thạch anh",
+                "Đá marble",
+                "Đá granite",
+                "Đá tự nhiên",
+                "Đá nhân tạo",
+              ],
+            },
+            {
+              title: "Chính sách giá",
+              content:
+                "Liên hệ trực tiếp để nhận báo giá chi tiết và tư vấn miễn phí về sản phẩm",
+            },
+          ],
+          structuredData: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Bảng giá sản phẩm SLABSTONE",
+            description: "Thông tin về giá các sản phẩm đá cao cấp SLABSTONE",
+            offers: {
+              "@type": "AggregateOffer",
+              priceCurrency: "VND",
+              seller: {
+                "@type": "Organization",
+                name: "SLABSTONE",
+              },
+            },
+          },
+        })}
+      />
       <Header />
       <div className="pt-8 pb-16">
         <div className="max-w-7xl mx-auto px-4">
@@ -26,7 +67,6 @@ const PricingPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Placeholder for pricing categories */}
             {[
               "Đá cao cấp",
               "Đá thạch anh",

@@ -6,12 +6,50 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Phone, Mail } from "lucide-react";
 import SEO from "@/components/SEO";
-import { pageSEO } from "@/lib/seo";
+import { generateSEO } from "@/lib/seo";
 
 const ContactPage = () => {
   return (
     <div className="min-h-screen bg-white">
-      <SEO {...pageSEO.contact} />
+      <SEO
+        {...generateSEO({
+          title: "Liên hệ",
+          description:
+            "Liên hệ với SLABSTONE để được tư vấn về sản phẩm đá cao cấp và nhận báo giá chi tiết. Đội ngũ chuyên viên của chúng tôi luôn sẵn sàng hỗ trợ bạn.",
+          sections: [
+            {
+              title: "Thông tin liên hệ",
+              content: [
+                "Địa chỉ: Nghi Văn, Nghi Lộc, Nghệ An",
+                "Điện thoại: 0978649797",
+                "Email: hello@slabstone.com.vn",
+              ],
+            },
+            {
+              title: "Showroom",
+              content:
+                "Tầng 2, toà nhà N03-T6, Đoàn Ngoại Giao, Phường Xuân Tảo, Quận Bắc Từ Liêm, Thành phố Hà Nội, Việt Nam",
+            },
+          ],
+          structuredData: {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            name: "Liên hệ SLABSTONE",
+            mainEntity: {
+              "@type": "Organization",
+              name: "SLABSTONE",
+              telephone: "+84-978-649-797",
+              email: "hello@slabstone.com.vn",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Nghi Văn",
+                addressRegion: "Nghi Lộc",
+                addressCountry: "Nghệ An",
+              },
+            },
+          },
+        })}
+      />
       <Header />
       <div className="pt-8 pb-16">
         <div className="max-w-7xl mx-auto px-4">

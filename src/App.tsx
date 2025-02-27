@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useRoutes, Routes, Route } from "react-router-dom";
-import { SEOProvider } from "./contexts/SEOContext";
+import { HelmetProvider } from "react-helmet-async";
 import Home from "./components/home";
 import ShowroomPage from "./pages/showroom";
 import FactoryPage from "./pages/factory";
@@ -14,13 +14,14 @@ import BeautifulHomesPage from "./pages/beautiful-homes";
 import BeautifulHomesDetailPage from "./pages/beautiful-homes/[slug]";
 import ContactPage from "./pages/contact";
 import AboutPage from "./pages/about";
+import ArchitectPage from "./pages/architect";
 import routes from "tempo-routes";
 
 import NotFoundPage from "./pages/404";
 
 function App() {
   return (
-    <SEOProvider>
+    <HelmetProvider>
       <Suspense
         fallback={
           <div className="min-h-screen flex items-center justify-center">
@@ -49,6 +50,7 @@ function App() {
             />
             <Route path="/lien-he" element={<ContactPage />} />
             <Route path="/gioi-thieu" element={<AboutPage />} />
+            <Route path="/kien-truc-su" element={<ArchitectPage />} />
 
             {/* Add this before the catchall route */}
             {import.meta.env.VITE_TEMPO === "true" && (
@@ -59,7 +61,7 @@ function App() {
           </Routes>
         </div>
       </Suspense>
-    </SEOProvider>
+    </HelmetProvider>
   );
 }
 

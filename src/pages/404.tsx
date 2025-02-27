@@ -19,9 +19,18 @@ const NotFoundPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Không tìm thấy trang"
-        description="Trang bạn đang tìm kiếm không tồn tại"
-        noindex={true}
+        {...generateSEO({
+          title: "Không tìm thấy trang",
+          description: "Trang bạn đang tìm kiếm không tồn tại",
+          sections: [
+            {
+              title: "Lỗi 404",
+              content:
+                "Trang bạn yêu cầu không tồn tại hoặc đã được di chuyển.",
+            },
+          ],
+          noindex: true,
+        })}
       />
       <Header />
       <div className="pt-16 pb-16">

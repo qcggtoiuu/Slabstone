@@ -3,12 +3,32 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NewsSection from "@/components/NewsSection";
 import SEO from "@/components/SEO";
-import { pageSEO } from "@/lib/seo";
+import { generateArticleSEO } from "@/lib/seo";
 
 const NewsPage = () => {
   return (
     <div className="min-h-screen bg-white">
-      <SEO {...pageSEO.news} />
+      <SEO
+        {...generateArticleSEO({
+          type: "article",
+          title: "Tin tức & Sự kiện",
+          description:
+            "Cập nhật tin tức mới nhất về công nghệ sản xuất đá nung kết, xu hướng thiết kế và dự án tiêu biểu từ SLABSTONE.",
+          author: "SLABSTONE",
+          date: new Date().toISOString(),
+          category: "Tin tức",
+          sections: [
+            {
+              title: "Tin tức mới nhất",
+              content: [
+                "Xu hướng thiết kế nội thất với đá cao cấp 2024",
+                "SLABSTONE ra mắt bộ sưu tập mới",
+                "Dự án tiêu biểu tháng 3/2024",
+              ],
+            },
+          ],
+        })}
+      />
       <Header />
       <main>
         <article className="pt-8 pb-16">

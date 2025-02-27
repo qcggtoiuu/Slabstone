@@ -1,6 +1,6 @@
-import { Helmet } from "react-helmet";
+import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
-import { pageSEO } from "@/lib/seo";
 
 interface SEOProps {
   title?: string;
@@ -9,7 +9,7 @@ interface SEOProps {
   type?: string;
   noindex?: boolean;
   structuredData?: object;
-  content?: React.ReactNode;
+  content?: string;
 }
 
 const SEO = ({
@@ -47,11 +47,14 @@ const SEO = ({
 
   return (
     <>
-      <Helmet>
-        <html lang="vi" />
+      <Helmet prioritizeSeoTags>
         <title>{title}</title>
         <meta name="description" content={description} />
-        {noindex && <meta name="robots" content="noindex,nofollow" />}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="robots"
+          content={noindex ? "noindex,nofollow" : "index,follow"}
+        />
 
         {/* Open Graph */}
         <meta property="og:type" content={type} />
@@ -59,6 +62,7 @@ const SEO = ({
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
         <meta property="og:url" content={url} />
+        <meta property="og:site_name" content="SLABSTONE" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -70,21 +74,24 @@ const SEO = ({
         <link rel="canonical" href={url} />
 
         {/* Additional Meta Tags */}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="keywords"
           content="đá nung kết, đá cao cấp, slabstone, đá nhân tạo, đá ốp lát, đá trang trí, đá nội thất"
         />
 
+        {/* Language */}
+        <html lang="vi" />
+
         {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData || defaultStructuredData)}
-        </script>
+        {structuredData && (
+          <script type="application/ld+json">
+            {JSON.stringify(structuredData || defaultStructuredData)}
+          </script>
+        )}
       </Helmet>
-      <div
-        style={{ display: "none" }}
-        dangerouslySetInnerHTML={{ __html: content as string }}
-      />
+      {content && (
+        <div className="hidden" dangerouslySetInnerHTML={{ __html: content }} />
+      )}
     </>
   );
 };

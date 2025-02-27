@@ -5,6 +5,7 @@ import { MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
+import { generateSEO } from "@/lib/seo";
 
 const ShowroomPage = () => {
   const showrooms = [
@@ -24,8 +25,54 @@ const ShowroomPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Hệ thống Showroom | SLABSTONE"
-        description="Ghé thăm showroom SLABSTONE để trải nghiệm trực tiếp các sản phẩm đá cao cấp và nhận tư vấn từ đội ngũ chuyên viên của chúng tôi."
+        {...generateSEO({
+          title: "Hệ thống Showroom",
+          description:
+            "Ghé thăm showroom SLABSTONE để trải nghiệm trực tiếp các sản phẩm đá cao cấp và nhận tư vấn từ đội ngũ chuyên viên của chúng tôi.",
+          sections: [
+            {
+              title: "Showroom Hà Nội",
+              content: [
+                "Địa chỉ: Tầng 2, toà nhà N03-T6, Đoàn Ngoại Giao, Phường Xuân Tảo, Quận Bắc Từ Liêm, Thành phố Hà Nội",
+                "Điện thoại: 0978649797",
+                "Email: hello@slabstone.com.vn",
+                "Giờ mở cửa: 8:00 - 17:30 (T2-T7)",
+              ],
+            },
+          ],
+          structuredData: {
+            "@context": "https://schema.org",
+            "@type": "Store",
+            name: "SLABSTONE Showroom Hà Nội",
+            image:
+              "https://images.unsplash.com/photo-1600585154526-990dced4db0d",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Tầng 2, toà nhà N03-T6, Đoàn Ngoại Giao",
+              addressLocality: "Bắc Từ Liêm",
+              addressRegion: "Hà Nội",
+              addressCountry: "VN",
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: "21.0667",
+              longitude: "105.7833",
+            },
+            openingHoursSpecification: {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ],
+              opens: "08:00",
+              closes: "17:30",
+            },
+          },
+        })}
       />
       <Header />
       <main>

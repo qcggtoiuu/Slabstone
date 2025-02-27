@@ -4,6 +4,30 @@ import { motion } from "framer-motion";
 const TechnologyShowcase = () => {
   return (
     <div className="w-full">
+      <div className="bg-black py-16 mb-0 text-center">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.h2
+            className="text-5xl font-bold mb-6 text-white"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            CÔNG NGHỆ ĐỘC QUYỀN
+          </motion.h2>
+          <motion.p
+            className="text-gray-300 text-xl max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            Khám phá hai công nghệ độc quyền tạo nên sự khác biệt của đá
+            SLABSTONE
+          </motion.p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* BODYTECH Section */}
         <div className="relative h-[600px] overflow-hidden group">

@@ -4,10 +4,41 @@ import Footer from "@/components/Footer";
 import ProductionLine from "@/components/ProductionLine";
 import TechnologyShowcase from "@/components/TechnologyShowcase";
 import FactoryVideo from "@/components/FactoryVideo";
+import SEO from "@/components/SEO";
+import { generateSEO } from "@/lib/seo";
 
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        {...generateSEO({
+          title: "Về chúng tôi",
+          description:
+            "SLABSTONE - Nhà máy sản xuất đá nung kết hiện đại nhất Đông Nam Á với quy mô 430.000m², đầu tư 1000 tỷ đồng và công suất 3.2 triệu m²/năm.",
+          image:
+            "https://noithatgiakhanh.com/wp-content/uploads/2025/02/3306588-scaled.jpg",
+          sections: [
+            {
+              title: "Tầm nhìn",
+              content:
+                "Trở thành nhà sản xuất đá nung kết hàng đầu Đông Nam Á, mang đến những sản phẩm chất lượng cao với công nghệ tiên tiến nhất từ châu Âu.",
+            },
+            {
+              title: "Sứ mệnh",
+              content:
+                "Kiến tạo không gian sống đẳng cấp thông qua việc cung cấp các sản phẩm đá nung kết chất lượng cao, thân thiện với môi trường và mang tính bền vững.",
+            },
+            {
+              title: "Công nghệ",
+              content: [
+                "BODYTECH - Công nghệ tạo hình đá đạt đến đỉnh cao hoàn mỹ",
+                "VEINTECH - Nghệ thuật tạo hình đường vân tinh tế đỉnh cao",
+                "CONTINUA+ 2000 - Dây chuyền sản xuất hiện đại nhất Việt Nam",
+              ],
+            },
+          ],
+        })}
+      />
       <Header />
       <div className="relative h-[400px] overflow-hidden">
         <div

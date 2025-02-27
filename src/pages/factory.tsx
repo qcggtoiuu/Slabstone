@@ -7,12 +7,42 @@ import ProductionLine from "@/components/ProductionLine";
 import TechnologyShowcase from "@/components/TechnologyShowcase";
 import FactoryVideo from "@/components/FactoryVideo";
 import SEO from "@/components/SEO";
-import { pageSEO } from "@/lib/seo";
+import { generateSEO } from "@/lib/seo";
 
 const FactoryPage = () => {
   return (
     <div className="min-h-screen bg-white">
-      <SEO {...pageSEO.factory} />
+      <SEO
+        {...generateSEO({
+          title: "Nhà máy SLABSTONE",
+          description:
+            "Khám phá nhà máy sản xuất đá nung kết hiện đại nhất Đông Nam Á của SLABSTONE với quy mô 430.000m², công suất 3.2 triệu m²/năm và công nghệ tiên tiến từ SACMI Italia.",
+          image:
+            "https://noithatgiakhanh.com/wp-content/uploads/2025/02/3306588-scaled.jpg",
+          sections: [
+            {
+              title: "Quy mô",
+              content: [
+                "Diện tích: 430.000m²",
+                "Vốn đầu tư: 1000 tỷ đồng",
+                "Công suất: 3.2 triệu m²/năm",
+              ],
+            },
+            {
+              title: "Công nghệ",
+              content: [
+                "Dây chuyền CONTINUA+ 2000 từ SACMI Italia",
+                "Hệ thống kiểm soát MDX tiên tiến",
+                "Dây chuyền 5 tầng với chiều dài 260m",
+              ],
+            },
+            {
+              title: "Địa chỉ",
+              content: "Nghi Văn, Nghi Lộc, Nghệ An",
+            },
+          ],
+        })}
+      />
       <Header />
       <main>
         <article>

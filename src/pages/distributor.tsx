@@ -2,18 +2,33 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "@/components/SEO";
+import { generateSEO } from "@/lib/seo";
 
 const DistributorPage = () => {
-  const benefits = [
-    "Chính sách chiết khấu hấp dẫn",
-    "Hỗ trợ marketing và trưng bày sản phẩm",
-    "Đào tạo sản phẩm chuyên sâu",
-    "Hỗ trợ kỹ thuật 24/7",
-    "Chính sách bảo hành sản phẩm dài hạn",
-    "Ưu tiên trong các chương trình khuyến mãi",
+  const dealerBenefits = [
+    "Hỗ trợ toàn diện: bảng hiệu, nhận diện thương hiệu",
+    "Mẫu sản phẩm: Tặng khi đạt doanh số năm",
+    "Công cụ bán hàng: Catalogue, tài liệu, kịch bản, hộp mẫu, cây trưng bày",
+    "Phần mềm Slabstone.App: Thiết kế, báo giá, quản lý kho (trị giá 200 triệu)",
+    "Đào tạo chuyên sâu: Bán hàng, marketing đa nền tảng",
+    "Kết nối thị trường: Tổng thầu, chủ đầu tư, kiến trúc sư",
+    "Hỗ trợ Sale tại địa bàn",
+  ];
+
+  const distributorBenefits = [
+    "Thiết kế miễn phí",
+    "Hỗ trợ toàn diện: bảng hiệu, nhận diện thương hiệu",
+    "Mẫu sản phẩm: Tặng khi đạt doanh số năm",
+    "Công cụ bán hàng: Catalogue, tài liệu, kịch bản, hộp mẫu, cây trưng bày",
+    "Phần mềm Slabstone.App: Thiết kế, báo giá, quản lý kho (trị giá 200 triệu)",
+    "Đào tạo chuyên sâu: Bán hàng, marketing đa nền tảng",
+    "Kết nối thị trường: Tổng thầu, chủ đầu tư, kiến trúc sư",
+    "Hỗ trợ Sale tại địa bàn",
+    "Thưởng doanh số & khuyến mãi đặc biệt theo đợt",
   ];
 
   const requirements = [
@@ -27,8 +42,33 @@ const DistributorPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Chính sách nhà phân phối | SLABSTONE"
-        description="Trở thành đối tác của SLABSTONE và cùng nhau phát triển trong lĩnh vực đá cao cấp. Tìm hiểu về quyền lợi và điều kiện trở thành nhà phân phối."
+        {...generateSEO({
+          title: "Chính sách nhà phân phối",
+          description:
+            "Trở thành đối tác của SLABSTONE và cùng nhau phát triển trong lĩnh vực đá cao cấp. Tìm hiểu về quyền lợi và điều kiện trở thành nhà phân phối.",
+          sections: [
+            {
+              title: "Quyền lợi đối tác",
+              content: [...dealerBenefits, ...distributorBenefits],
+            },
+            {
+              title: "Điều kiện trở thành đối tác",
+              content: requirements,
+            },
+          ],
+          structuredData: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Chính sách nhà phân phối SLABSTONE",
+            description:
+              "Thông tin về chính sách và điều kiện trở thành nhà phân phối của SLABSTONE",
+            provider: {
+              "@type": "Organization",
+              name: "SLABSTONE",
+              url: "https://slabstone.vn",
+            },
+          },
+        })}
       />
       <Header />
       <main>
@@ -43,39 +83,65 @@ const DistributorPage = () => {
             </p>
           </header>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <section>
-              <h2 className="text-2xl font-bold mb-6">Quyền lợi đối tác</h2>
-              <div className="space-y-4">
-                {benefits.map((benefit, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg"
-                  >
-                    <Check className="w-5 h-5 text-green-500 mt-0.5" />
-                    <span>{benefit}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <Card className="border-2 border-gray-200 overflow-hidden">
+              <CardHeader className="bg-gray-900 text-white text-center py-6">
+                <CardTitle className="text-2xl font-bold">
+                  ĐẠI LÝ CẤP 1
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4">QUYỀN LỢI:</h3>
+                <div className="space-y-3">
+                  {dealerBenefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
 
-            <section>
-              <h2 className="text-2xl font-bold mb-6">
-                Điều kiện trở thành đối tác
-              </h2>
-              <div className="space-y-4">
-                {requirements.map((requirement, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg"
-                  >
-                    <Check className="w-5 h-5 text-green-500 mt-0.5" />
-                    <span>{requirement}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
+            <Card className="border-2 border-primary overflow-hidden">
+              <CardHeader className="bg-primary text-white text-center py-6 relative">
+                <div className="absolute top-0 right-0 bg-yellow-500 text-black text-xs font-bold px-3 py-1 rounded-bl-lg">
+                  PREMIUM
+                </div>
+                <CardTitle className="text-2xl font-bold">
+                  TỔNG PHÂN PHỐI
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <h3 className="text-xl font-semibold mb-4">QUYỀN LỢI:</h3>
+                <div className="space-y-3">
+                  {distributorBenefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span>{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-6">
+              Điều kiện trở thành đối tác
+            </h2>
+            <div className="space-y-4">
+              {requirements.map((requirement, index) => (
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg"
+                >
+                  <Check className="w-5 h-5 text-green-500 mt-0.5" />
+                  <span>{requirement}</span>
+                </div>
+              ))}
+            </div>
+          </section>
 
           <section className="mt-16 text-center">
             <h2 className="text-2xl font-bold mb-4">Liên hệ hợp tác</h2>
