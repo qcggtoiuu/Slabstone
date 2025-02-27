@@ -258,10 +258,10 @@ const AboutPage = () => {
                       <img
                         src={
                           index === 0
-                            ? "https://images.unsplash.com/photo-1618221469555-7f3ad97540d6?w=800"
+                            ? "https://noithatgiakhanh.com/wp-content/uploads/2025/02/slabstone-kho-lon.jpg"
                             : index === 1
                               ? "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800"
-                              : "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800"
+                              : "https://noithatgiakhanh.com/wp-content/uploads/2025/02/slabstone-nha-may-tien-phong.jpg"
                         }
                         alt={advantage.title}
                         className="h-full w-full object-cover rounded-lg"

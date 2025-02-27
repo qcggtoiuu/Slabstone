@@ -52,9 +52,7 @@ const Header = () => {
       </div>
 
       {/* Main navigation */}
-      <nav
-        className={`bg-white border-b px-4 py-4 relative transition-transform duration-300 md:transform-none ${visible ? "" : "-translate-y-full"} sticky top-0 z-50`}
-      >
+      <nav className="bg-white border-b px-4 py-4 relative sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <div
@@ -137,7 +135,13 @@ const Header = () => {
                 // Create mobile menu
                 const mobileMenu = document.getElementById("mobile-menu");
                 if (mobileMenu) {
-                  mobileMenu.classList.toggle("hidden");
+                  if (mobileMenu.classList.contains("hidden")) {
+                    mobileMenu.classList.remove("hidden");
+                    mobileMenu.classList.add("flex");
+                  } else {
+                    mobileMenu.classList.add("hidden");
+                    mobileMenu.classList.remove("flex");
+                  }
                 }
               }}
             >

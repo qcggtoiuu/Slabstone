@@ -31,7 +31,7 @@ const HeroSection = ({
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <div className="relative w-full h-full">
           <iframe
-            src="https://www.youtube.com/embed/KQF2qSRpNTg?autoplay=1&mute=1&controls=0&loop=1&playlist=KQF2qSRpNTg&showinfo=0"
+            src={`https://www.youtube.com/embed/${window.innerWidth <= 768 ? "FQZNs2zXC9c" : "KQF2qSRpNTg"}?autoplay=1&mute=1&controls=0&loop=1&playlist=${window.innerWidth <= 768 ? "FQZNs2zXC9c" : "KQF2qSRpNTg"}&showinfo=0`}
             title="Background Video"
             className="absolute w-full h-[200%] -top-[50%] left-1/2 -translate-x-1/2 pointer-events-none"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

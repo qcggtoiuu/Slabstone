@@ -14,7 +14,7 @@ const BeautifulHomes = () => {
       id: 2,
       title: "Penthouse Landmark 81",
       image:
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800",
+        "https://noithatgiakhanh.com/wp-content/uploads/2025/02/landmark.jpg",
       category: "Căn hộ",
     },
     {
@@ -27,8 +27,7 @@ const BeautifulHomes = () => {
     {
       id: 4,
       title: "Nhà phố Thảo Điền",
-      image:
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800",
+      image: "https://noithatgiakhanh.com/wp-content/uploads/2025/02/villa.jpg",
       category: "Nhà phố",
     },
   ];
