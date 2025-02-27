@@ -55,6 +55,13 @@ const Header = () => {
             <Button
               variant="ghost"
               className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
+              onClick={() => (window.location.href = "/gioi-thieu")}
+            >
+              Về chúng tôi
+            </Button>
+            <Button
+              variant="ghost"
+              className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
               onClick={() => (window.location.href = "/san-pham")}
             >
               Sản phẩm
@@ -86,13 +93,6 @@ const Header = () => {
               onClick={() => (window.location.href = "/lien-he")}
             >
               Liên hệ
-            </Button>
-            <Button
-              variant="ghost"
-              className="text-sm font-medium hover:bg-transparent hover:text-gray-600"
-              onClick={() => (window.location.href = "/gioi-thieu")}
-            >
-              Về chúng tôi
             </Button>
           </div>
 
