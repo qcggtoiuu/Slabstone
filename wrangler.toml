@@ -3,3 +3,7 @@ name = "slabstone"
 
 # Specify the build output directory for Pages
 pages_build_output_dir = "dist"
+
+# Specify the build command
+[build]
+command = "npm install && npm install caniuse-lite@latest --no-save && npm run pages:build"

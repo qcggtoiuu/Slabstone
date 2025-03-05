@@ -11,7 +11,9 @@
     "preview": "vite preview",
     "types:supabase": "npx supabase gen types typescript --project-id $SUPABASE_PROJECT_ID > src/types/supabase.ts",
     "typecheck": "tsc --noEmit",
-    "pages:build": "node build.js"
+    "pages:build": "node build.js",
+    "update-deps": "node update-deps.js",
+    "cloudflare-build": "node update-deps.js && node build.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
