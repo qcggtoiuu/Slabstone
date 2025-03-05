@@ -1,5 +1,5 @@
 # Wrangler configuration for Cloudflare Pages
 name = "slabstone"
 
-[site]
-bucket = "./dist/client"
+# Specify the build output directory for Pages
+pages_build_output_dir = "dist"
