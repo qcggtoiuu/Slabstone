@@ -1,0 +1,5 @@
+# Wrangler configuration for Cloudflare Pages
+name = "slabstone"
+
+[site]
+bucket = "./dist/client"

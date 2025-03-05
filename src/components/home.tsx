@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import Header from "./Header";
 import HeroSection from "./HeroSection";
 import Footer from "./Footer";
@@ -6,15 +6,16 @@ import SEO from "./SEO";
 import { generateSEO } from "@/lib/seo";
 import { Skeleton } from "./ui/skeleton";
 
-const ProductGrid = lazy(() => import("./ProductGrid"));
-const ProductDetail = lazy(() => import("./ProductDetail"));
-const ProductionLine = lazy(() => import("./ProductionLine"));
-const TechnologyShowcase = lazy(() => import("./TechnologyShowcase"));
-const FactoryVideo = lazy(() => import("./FactoryVideo"));
-const NewsSection = lazy(() => import("./NewsSection"));
-const BeautifulHomes = lazy(() => import("./BeautifulHomes"));
-const PartnershipSection = lazy(() => import("./PartnershipSection"));
-const WhyChooseUs = lazy(() => import("./WhyChooseUs"));
+// Use static imports for components that are also imported elsewhere
+import ProductGrid from "./ProductGrid";
+import ProductDetail from "./ProductDetail";
+import ProductionLine from "./ProductionLine";
+import TechnologyShowcase from "./TechnologyShowcase";
+import FactoryVideo from "./FactoryVideo";
+import NewsSection from "./NewsSection";
+import BeautifulHomes from "./BeautifulHomes";
+import PartnershipSection from "./PartnershipSection";
+import WhyChooseUs from "./WhyChooseUs";
 
 interface HomeProps {
   initialSelectedProductId?: string;
