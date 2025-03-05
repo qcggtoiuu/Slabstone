@@ -14,7 +14,24 @@ if (!fs.existsSync('dist')) {
 
 // Copy files from dist/client to dist
 console.log('Copying files from dist/client to dist...');
-copyFolderRecursiveSync('dist/client', 'dist');
+// Copy all files from dist/client to dist (not to dist/client/client)
+const clientDir = 'dist/client';
+const targetDir = 'dist';
+if (fs.existsSync(clientDir) && fs.lstatSync(clientDir).isDirectory()) {
+  const files = fs.readdirSync(clientDir);
+  files.forEach(function(file) {
+    const sourcePath = path.join(clientDir, file);
+    const targetPath = path.join(targetDir, file);
+    
+    if (fs.lstatSync(sourcePath).isDirectory()) {
+      // For directories, copy recursively
+      copyDirRecursive(sourcePath, targetPath);
+    } else {
+      // For files, just copy
+      fs.copyFileSync(sourcePath, targetPath);
+    }
+  });
+}
 
 console.log('Build completed successfully!');
 
@@ -45,4 +62,27 @@ function copyFolderRecursiveSync(source, target) {
 function copyFileSync(source, target) {
   const targetFile = path.join(target, path.basename(source));
   fs.copyFileSync(source, targetFile);
+}
+
+// Function to recursively copy a directory
+function copyDirRecursive(source, target) {
+  // Create target directory if it doesn't exist
+  if (!fs.existsSync(target)) {
+    fs.mkdirSync(target, { recursive: true });
+  }
+  
+  // Copy all files and subdirectories
+  const files = fs.readdirSync(source);
+  files.forEach(function(file) {
+    const sourcePath = path.join(source, file);
+    const targetPath = path.join(target, file);
+    
+    if (fs.lstatSync(sourcePath).isDirectory()) {
+      // Recursively copy subdirectories
+      copyDirRecursive(sourcePath, targetPath);
+    } else {
+      // Copy files
+      fs.copyFileSync(sourcePath, targetPath);
+    }
+  });
 }

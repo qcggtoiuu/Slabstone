@@ -1,4 +1,4 @@
 # Cloudflare Pages configuration
 [build]
-command = "npm run pages:build"
+command = "npm install && npm run pages:build"
 output_directory = "dist"
