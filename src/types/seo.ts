@@ -23,7 +23,6 @@ export interface PageContent {
     category?: string;
     tags?: string[];
   };
-  structuredData?: object;
 }
 
 export interface ProductContent extends PageContent {
