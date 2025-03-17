@@ -1,1 +1,5 @@
-{"main_branch":"main","build_config":{"build_command":"npm run build","destination_dir":"dist"}}
+{
+  "build": {
+    "output_directory": "dist/client"
+  }
+}

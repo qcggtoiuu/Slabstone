@@ -1,0 +1,10 @@
+[site]
+site_name = "Slabstone"
+bucket = "./dist/client"
+
+[build]
+command = "npm run build"
+output_dir = "dist/client"
+
+[build.upload]
+format = "directory"
