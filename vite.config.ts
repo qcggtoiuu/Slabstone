@@ -17,7 +17,7 @@ export default defineConfig({
       ? "/"
       : process.env.VITE_BASE_PATH || "/",
   build: {
-    outDir: "dist/client",
+    outDir: "dist",
   },
   optimizeDeps: {
     entries: ["src/main.tsx", "src/tempobook/**/*"],
